@@ -22,12 +22,11 @@ function App() {
 
 
   const pokeCards = pokeImages.map(poke => <Card pokeImg={poke.url} key={poke.id} />);
-  pokeImages.map(poke =>console.log(poke.url));
+
 
   return (
     <>
       <Scoreboard />
-      <Card pokeImg={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"}/>
       <div className='cardContainer'>
         {pokeCards}
       </div>

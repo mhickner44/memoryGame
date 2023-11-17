@@ -4,7 +4,7 @@ import Card from './components/Card'
 import Scoreboard from './components/scoreboard'
 
 function App() {
-  const [pokeTeam, setPokeTeam] = useState();
+  const [pokeTeam, setPokeTeam] = useState([]);
 
 
   //list of wanted pokemon
@@ -34,9 +34,10 @@ function App() {
     response = response.map(res => res.clone()) //for error about reading response.json multiple times
     const data = await Promise.all(response.map(responses => responses.json()))
     //map throught he data arr and get what I want
-    pokeArr = data.map((pokeData) => pokeData["sprites"]["other"]["official-artwork"]["front_default"])
-
-    setPokeTeam(pokeArr.map((poke) => <Card poke={poke} />))
+   
+    pokeArr = data.map((pokeData) => pokeData =  {url:pokeData["sprites"]["other"]["official-artwork"]["front_default"], id:pokeData.name})
+    
+    setPokeTeam(pokeArr)
   }
 
   useEffect(() => {
@@ -44,12 +45,11 @@ function App() {
   }, []);
 
 
-
   return (
     <>
       <Scoreboard />
       <div className='cardContainer'>
-        {pokeTeam}
+        {pokeTeam.map((pokeInfo) => <Card poke={pokeInfo} key={pokeInfo.id} />)}
       </div>
 
     </>

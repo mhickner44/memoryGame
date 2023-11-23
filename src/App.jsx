@@ -47,12 +47,31 @@ function App() {
     makePokeRequest();
   }, []);
 
+  //shuffle algo
+  function shuffle(array) {
+    let currentIndex = array.length, randomIndex;
 
+    // While there remain elements to shuffle.
+    while (currentIndex > 0) {
+
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+
+    return array;
+  }
 
   function seeCompInfo(e, data) {
     let currentPoke;
     let beenUsed = false
     let chosenTempArr = chosenArr;
+    let tempPokeDisplay = pokeTeam;
+    console.log(tempPokeDisplay)
 
     //if clicked on the poke image it gets the card info
     if (e.target.dataset.name != undefined) {
@@ -78,8 +97,12 @@ function App() {
         setScore(score + 1)
         chosenTempArr.push(currentPoke)
         setChosenArr(chosenTempArr)
-
       }
+      //re arrange the array to then display again.
+
+      tempPokeDisplay = pokeTeam
+      shuffle(tempPokeDisplay)
+      setPokeTeam(tempPokeDisplay)
     }
 
   }

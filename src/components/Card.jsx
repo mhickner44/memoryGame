@@ -14,7 +14,7 @@ function Card(poke) {
     return (
         <>
             <div  className='card'  data-name={poke.poke.id} >
-                <img src={poke.poke.url}  className='img'/>
+                <img src={poke.poke.url}  className='img' data-name={poke.poke.id}/>
                 <h1 className='pokeName'>{poke.poke.id}</h1>
             </div>
         </>

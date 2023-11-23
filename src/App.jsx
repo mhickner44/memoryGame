@@ -51,28 +51,37 @@ function App() {
 
   function seeCompInfo(e, data) {
     let currentPoke;
+    let beenUsed = false
+    let chosenTempArr = chosenArr;
 
-    
-//this logic is all fucked up
-    if (e.target.dataset.name == undefined) {
-      currentPoke = e.target.parentNode.dataset.name
-    } else {
+    //if clicked on the poke image it gets the card info
+    if (e.target.dataset.name != undefined) {
+      //click was not on a card
+      //if card it gets the poke name 
       currentPoke = e.target.dataset.name
-    }
-    setScore(score + 1)
 
-    for (const key in chosenArr) {
-      if (chosenArr[key] == currentPoke) {
+      //checks to see if the pokemon has been selected already by checkign the array
+      for (const key in chosenArr) {
+        if (chosenArr[key] == currentPoke) {
+          console.log("pokemon has been selected")
+          //if found in array set score to 0 
+          beenUsed = true;
+        }
+      }
+
+      //increments the score 
+      if (beenUsed === true) {
         setScore(0)
+        chosenTempArr = []
+        setChosenArr(chosenTempArr)
+      } else {
+        setScore(score + 1)
+        chosenTempArr.push(currentPoke)
+        setChosenArr(chosenTempArr)
+
       }
     }
-    if (score != 0) {
-      let chosenTemp = []
-      chosenTemp.push(currentPoke)
-      setChosenArr(chosenTemp)
-    }
 
-    //check array for what I have selected already 
   }
 
 

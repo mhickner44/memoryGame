@@ -7,6 +7,7 @@ function App() {
   const [score, setScore] = useState(0);
   const [pokeTeam, setPokeTeam] = useState([]);
   const [chosenArr, setChosenArr] = useState([]);
+  const [bestScore, setBestScore] = useState(0)
 
 
   //list of wanted pokemon
@@ -71,6 +72,7 @@ function App() {
     let beenUsed = false
     let chosenTempArr = chosenArr;
     let tempPokeDisplay = pokeTeam;
+
     console.log(tempPokeDisplay)
 
     //if clicked on the poke image it gets the card info
@@ -97,9 +99,12 @@ function App() {
         setScore(score + 1)
         chosenTempArr.push(currentPoke)
         setChosenArr(chosenTempArr)
+        if (score >= bestScore) {
+          setBestScore(score+ 1)
+        }
       }
-      //re arrange the array to then display again.
 
+      //re arrange the array to then display again.
       tempPokeDisplay = pokeTeam
       shuffle(tempPokeDisplay)
       setPokeTeam(tempPokeDisplay)
@@ -110,7 +115,7 @@ function App() {
 
   return (
     <>
-      <Scoreboard data={score} />
+      <Scoreboard currentScore={score} topScore={bestScore} />
       <div className='cardContainer' onClick={seeCompInfo}>
         {pokeTeam.map((pokeInfo) => <Card poke={pokeInfo} key={pokeInfo.id} onClick={((e) => seeCompInfo(e, data))} />)}
       </div>

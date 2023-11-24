@@ -1,13 +1,13 @@
 import { useState } from 'react'
 
-function Scoreboard({data}){
+function Scoreboard(props){
 
-
+console.log(props)
     return (
         <>
             <div className='board'>
-                <h1>current count:{data}</h1>
-                <h1>best score:</h1>
+                <h1>current count:{props.currentScore}</h1>
+                <h1>best score:{props.topScore}</h1>
             </div>
         </>
     )
